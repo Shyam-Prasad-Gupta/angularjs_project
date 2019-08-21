@@ -1,30 +1,36 @@
 // Define the `phonecatApp` module
 var noteApp = angular.module('noteApp', []);
-
+var noteListSize = 4;
 // Define the `PhoneListController` controller on the `phonecatApp` module
 noteApp.controller('NoteListController', function noteListController($scope) {
-  $scope.notes = [
-    {
-	  noteid:1,
+  $scope.notes = {
+    1:{
+      type: 'text',
       value: 'Test note one.'
     }, 
-	{
-	  noteid:2,
+	  2:{
+    type: 'text',
       value: 'Test note two.'
     }, 
-	{
-	  noteid:3,
+	  3:{
+	    type:'text',
       value: 'Test note three.'
+    },
+    4:{
+	    type:'url',
+      value: 'www.patentbuddy.com'
     }
-  ];
-  
-  $scope.new_note;
-  
-  $scope.addNote = function addNoteToList(note){
-	  $scope.notes[notes.length+1] = note;
   };
   
+  $scope.new_note_value;
+  $scope.new_note_type;
+  
+  $scope.addNote = function addNoteToList(){
+    $scope.notes[++noteListSize] = { type: $scope.new_note_type,
+                        value: $scope.new_note_value };
+                      };
+  
   $scope.deleteNote = function delteNoteFromList(noteId){
-	  $scope.notes.splice(noteId-1, 1);
+	  delete $scope.notes[noteId]
   };
 });

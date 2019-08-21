@@ -9,14 +9,17 @@
   <h2>Add/Edit Notes</h2>
   
   <ul style='list-style:none;'>
-    <li ng-repeat="note in notes track by $index">
-      <p><span>{{note.noteid}}. {{note.value}}</span><input type="button" ng-click="deleteNote(note.noteid)" value="X"/></p>
+    <li ng-repeat="(key, value) in notes">
+      <p><span>{{value.value}}({{value.type}})</span><input type="button" ng-click="deleteNote(key)" value="X"/></p>
     </li>
   </ul>
-  <input type="button" ng-click="addNote()" value="Add Note" />
   </br>
-  <input type="text" ng-model="new_note" style="margin-top:20px;display:{{noteInputBox}};" />
-  
+  Note Value: <input type="text" ng-model="new_note_value" /></br>
+  Note Type:<select id='selectednotetype'>
+    <option value='url'>URL</option>
+    <option value='text'>text</option>
+  </select>
+  <input type="button" ng-click="addNote()" value="Add Note" />
    
 </div>
 
