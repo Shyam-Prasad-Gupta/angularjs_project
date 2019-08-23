@@ -4,35 +4,34 @@
   <script src="lib/angular_scripts/angular.js"></script>
   <script src="lib/scripts/app.js"></script>
 </head>
+
 <body>
-<div ng-controller="NoteListController as nlc">
+<div ng-controller="NoteListController">
   <h2>Add/Edit Notes</h2>
-  
+  <!--filter by note text/note type-->
+  Filter: <input type="text" ng-model="filterText" ng-change="refreshScope()" />
+  <!--sort by note note type or key-->
+  Sort by:
+        <select ng-model="orderProp">
+          <option value="value">Alphabetical</option>
+          <option value="type">Note Type</option>
+        </select>
   <ul style='list-style:none;'>
-    <li ng-repeat="(key, value) in notes">
+    <li ng-repeat="(key,value) in notes | typeFilter">
       <p><span>{{value.value}}({{value.type}})</span><input type="button" ng-click="deleteNote(key)" value="X"/></p>
     </li>
   </ul>
+  
   </br>
+  
   Note Value: <input type="text" ng-model="new_note_value" /></br>
-  Note Type:<select id='selectednotetype'>
+  Note Type:<select id='selectednotetype' ng-model="new_note_type">
     <option value='url'>URL</option>
     <option value='text'>text</option>
   </select>
   <input type="button" ng-click="addNote()" value="Add Note" />
    
 </div>
-
-<!--
-<div ng-controller="FruitListController">
-  <ul>
-	<li ng-repeat="fruit in fruits">
-		<span>{{fruit.name}}</span>
-		<p>{{fruit.snippet}}</p>
-	</li>
-  </ul>
-</div>
--->
 
 </body>
 </html>

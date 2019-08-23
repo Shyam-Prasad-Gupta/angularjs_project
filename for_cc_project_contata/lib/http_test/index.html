@@ -1,0 +1,27 @@
+<html ng-app="httpApp">
+
+<head>
+    <script src="angular.js"></script>
+    <script src="httpscript.js"></script>
+    <title>Test Title</title>
+</head>
+
+<body>
+    <div>
+        <div ng-controller="httpController">
+            <h2 style="text-align: center;text-decoration: underline;">Personal Wiki</h2>
+            <div style="margin-left: 40px;">
+                <input type="text" ng-model="searchText" placeholder="Search Your Text Here..." maxlength="100" />
+                <input type="button" value="Search.." ng-click="searchWiki()" />
+            </div>
+            <ul style="list-style: none">
+                <li ng-repeat="obj in data">
+                    <b>Title:</b> {{obj.title}}</br>
+                    <b>Description:</b> {{obj.description}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+<html ng-app="myMainModule">
+<head>
+    <title>Test Title</title>
+    <script src="script.js"></script>
+    <script src="angular.js"></script>
+</head>
+
+<body>
+    <div ng-controller="myMainController">
+        <p>Let's try this simple notify service, injected into the controller...</p>
+        <input ng-init="message='test'" ng-model="message">
+        <button ng-click="callNotify(message);">NOTIFY</button>
+        <p>(you have to click 3 times to see an alert)</p>
+    </div>
+</body>
+</html>
