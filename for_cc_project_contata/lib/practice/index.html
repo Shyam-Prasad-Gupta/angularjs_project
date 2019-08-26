@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <html ng-app="myMainModule">
 <head>
     <title>Test Title</title>
@@ -9,8 +10,26 @@
     <div ng-controller="myMainController">
         <p>Let's try this simple notify service, injected into the controller...</p>
         <input ng-init="message='test'" ng-model="message">
+=======
+<html ng-app="practiceModule">
+
+<head>
+    <title>Test</title>
+    <script src="angular.js"></script>
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div ng-controller="PracticeController">
+        <p>Let's try this simple notify service, injected into the controller...</p>
+        <input ng-model="message" ng-change="onchng()" />
+>>>>>>> 63ed02898ffd797a6b3ecdac736ba8499350289c
         <button ng-click="callNotify(message);">NOTIFY</button>
         <p>(you have to click 3 times to see an alert)</p>
     </div>
 </body>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 63ed02898ffd797a6b3ecdac736ba8499350289c
 </html>

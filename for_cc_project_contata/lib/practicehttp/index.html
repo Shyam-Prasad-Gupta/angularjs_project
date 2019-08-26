@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="ngApp">
+
+<head>
+    <title>Test Title</title>
+    <script src="angular.js"></script>
+    <script src="script.js"></script>
+    <script>
+        
+    </script>
+</head>
+
+<body>
+    <div ng-controller="mainController">
+        {{successDescResp}}
+        <div>
+            <h3>Search results for: {{searchText}}</h3>
+        </div>
+        <hr>
+        <!--Displaying the search results one by one-->
+        <div>
+            <input type="hidden" id="imageUrls" value="{{imageList.join(',')}}" />
+            <ul style="list-style: none" data-ng-repeat="i in [0,1,2,3,4,5]">
+                <li>
+                    <div>
+                        <a href="{{descList[2][i]}}" target="_blank" style="text-decoration: none;">
+                            <img src="###" alt="image is not available" />
+                            <h3>{{descList[0][i]}}</h3>
+                            <p>{{descList[1][i]}}</p>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
