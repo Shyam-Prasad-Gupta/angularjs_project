@@ -12,7 +12,10 @@
 
 <body>
     <div ng-controller="mainController">
-        {{successDescResp}}
+        <div style="margin-left: 40px;">
+            <input type="text" ng-model="searchText" placeholder="Search Your Text Here..." maxlength="100" />
+            <input type="button" value="Search.." ng-click="searchWiki()" />
+        </div>
         <div>
             <h3>Search results for: {{searchText}}</h3>
         </div>
@@ -24,7 +27,7 @@
                 <li>
                     <div>
                         <a href="{{descList[2][i]}}" target="_blank" style="text-decoration: none;">
-                            <img src="###" alt="image is not available" />
+                            <img ng-src="{{imageList[i]}}" alt="image is not available" width="150px;" height="150px;" />
                             <h3>{{descList[0][i]}}</h3>
                             <p>{{descList[1][i]}}</p>
                         </a>

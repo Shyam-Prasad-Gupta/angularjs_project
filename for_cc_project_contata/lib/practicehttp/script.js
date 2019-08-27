@@ -3,11 +3,9 @@ var app = angular.module('ngApp', []);
 app.controller('mainController', function myMainController($scope, $http) {
 
     //data binding variables
-    $scope.searchText = "Narendra Modi";
+    $scope.searchText;
     $scope.descList = [];
-    //$scope.imageList = [];
 
-    //http related variable
     $scope.successDescResp;
     $scope.errorDescResp;
     $scope.successImgResp;
@@ -23,11 +21,19 @@ app.controller('mainController', function myMainController($scope, $http) {
         $scope.errorDescResp = status;
     };
 
-    $http({
-        method: "GET",
-        url: "https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=" + encodeURI($scope.searchText) + "&limit=20&origin=*"
-    }).then(onSuccess, onError);
+    $scope.searchWiki = function searchWiki() {
+        $http({
+            method: "GET",
+            url: "https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=" + encodeURI($scope.searchText) + "&limit=20&origin=*"
+        }).then(onSuccess, onError);
 
+        $http({
+            method: "GET",
+            url: "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages%7Cpageterms&generator=prefixsearch&redirects=1&formatversion=2&piprop=thumbnail&pithumbsize=250&pilimit=20&wbptterms=description&gpssearch=" + encodeURI($scope.searchText) + "&gpslimit=20&origin=*"
+        }).then(onImgSuccess, onImgError);
+
+    };
+ 
     //parse the data
     function parseDescList(data) {
         debugger;
@@ -40,18 +46,13 @@ app.controller('mainController', function myMainController($scope, $http) {
     //to get the image list
     var onImgSuccess = function (data, status, header, config) {
         debugger;
-        $scope.imageList = parseImgList(data);
+        parseImgList(data);
     };
 
     var onImgError = function (data, status, header, config) {
         debugger;
         $scope.errorResp = status;
     };
-
-    $http({
-        method: "GET",
-        url: "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages%7Cpageterms&generator=prefixsearch&redirects=1&formatversion=2&piprop=thumbnail&pithumbsize=250&pilimit=20&wbptterms=description&gpssearch=" + encodeURI($scope.searchText) + "&gpslimit=20&origin=*"
-    }).then(onImgSuccess, onImgError);
 
     //parse the image list
     function parseImgList(data) {
@@ -61,7 +62,7 @@ app.controller('mainController', function myMainController($scope, $http) {
         for (var i = 0; i < imgData.length; i++) {
             if (imgData[i].thumbnail != null && imgData[i].thumbnail.source != undefined && imgData[i].thumbnail.source.trim().length > 0) {
                 $scope.imageList[i] = imgData[i].thumbnail.source;
-            }else{
+            } else {
                 $scope.imageList[i] = $scope.defaultImageUrl;
             }
         }
